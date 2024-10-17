@@ -17,6 +17,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 dir('Todo-app') {
+                       sh 'pip install flask'
                        sh 'python3 -m unittest discover -s tests'
                 }
              
