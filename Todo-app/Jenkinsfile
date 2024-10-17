@@ -1,43 +1,35 @@
 pipeline {
     agent any
-    environment {
-        GIT_REPO = 'https://github.com/shubham1910200/Devops_Project.git'
-        BRANCH = 'main' // or whichever branch you want to build
-    }
+
     stages {
-        stage('Checkout') {
+        stage('Clone Repository') {
             steps {
-                script {
-                    // Clone the repository
-                    git url: "${GIT_REPO}", branch: "${BRANCH}"
-                }
+                git url: 'https://github.com/shubham1910200/Devops_Project.git', credentialsId: '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'
             }
         }
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the Docker image from the repository
-                    docker.build("flask-app:${env.BUILD_ID}")
+                    dockerImage = docker.build("soma1999/todo-app")
                 }
             }
         }
         stage('Run Tests') {
             steps {
-                script {
-                    // Run tests inside the container
-                    docker.image("flask-app:${env.BUILD_ID}").inside {
-                        sh 'pytest tests/'
-                    }
-                }
+                sh 'python3 -m unittest discover -s tests'
             }
         }
         stage('Deploy') {
             steps {
                 script {
-                    // Deploy the Docker container
-                    sh 'docker run -d -p 5000:5000 flask-app:${env.BUILD_ID}'
+                    dockerImage.run('-d -p 5000:5000')  // Run in detached mode
                 }
             }
+        }
+    }
+    post {
+        always {
+            cleanWs()  // Clean workspace after pipeline execution
         }
     }
 }
