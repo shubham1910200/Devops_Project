@@ -10,7 +10,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("soma1999/todo-app")
+                    dockerImage = docker.build("soma1999/todo-app","Todo-app")
                 }
             }
         }
