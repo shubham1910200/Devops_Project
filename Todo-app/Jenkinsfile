@@ -16,7 +16,10 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                sh 'python3 -m unittest discover -s tests'
+                dir('Todo-app') {
+                       sh 'python3 -m unittest discover -s tests'
+                }
+             
             }
         }
         stage('Deploy') {
