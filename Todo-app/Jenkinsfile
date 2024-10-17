@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/shubham1910200/Devops_Project.git', credentialsId: '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'
+                git url: 'https://github.com/shubham1910200/Devops_Project.git', credentialsId: 'jenkins'
             }
         }
         stage('Build Docker Image') {
