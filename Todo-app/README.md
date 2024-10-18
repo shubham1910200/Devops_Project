@@ -144,4 +144,3 @@ git push origin feature-branch
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
 ```
 
-Now, everything is presented in a single flow within the **Installation** section, right after the `cd Devops_Project/Todo-app` command. This makes it easier to copy and paste without navigating between different parts.
